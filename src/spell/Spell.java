@@ -1,12 +1,21 @@
 package spell;
 
-import hero.Hero;
+import hero.*;
 
 import java.util.ArrayList;
 
-public interface Spell {
-    ArrayList<StatusEffect> statusesApplied = null;
-    Hero castedBy = null;
-    float damage = 0;
-    public void CastedOn(Hero hero);
+public abstract class Spell {
+    protected final Hero castedBy;
+    protected float damage = 0;
+    protected float amp;
+
+    public Spell(Hero hero, float amp) {
+        castedBy = hero;
+        this.amp = amp;
+    }
+
+    public void CastedOn(Knight hero) {}
+    public void CastedOn(Wizard hero) {}
+    public void CastedOn(Rogue hero) {}
+    public void CastedOn(Pyromancer hero) {}
 }

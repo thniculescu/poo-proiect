@@ -2,6 +2,7 @@ package main;
 
 import hero.Hero;
 import hero.Move;
+import spell.Spell;
 
 import java.util.ArrayList;
 
@@ -14,8 +15,30 @@ public class Main {
         ArrayList<ArrayList<Move>> moves = fileIO.getMoves();
         int numRounds = fileIO.getNumRounds();
 
-        System.out.println(heroes);
+        for(int i = 0; i < numRounds; i++) {
+            for(int j = 0; j < heroes.size(); j++) {
+                heroes.get(j).Move(moves.get(i).get(j));
+                heroes.get(j).applyStatus();
+            }
 
-        System.out.println(moves);
+            for(int j = 0; j < heroes.size(); j++) {
+                Hero first = heroes.get(j);
+                for(int k = j + 1; k < heroes.size(); k++) {
+                    Hero second = heroes.get(k);
+                    if(first.getX() == second.getX()
+                    && first.getY() == second.getY()
+                    && first.alive() && second.alive()) {
+                        ArrayList<Spell> firstSpells = first.getSpells(1);
+                        ArrayList<Spell> secondSpells = second.getSpells(1);
+                        first.isAffectedBy(secondSpells);
+                        second.isAffectedBy(firstSpells);
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i < heroes.size(); i++) {
+            System.out.println(heroes.get(i));
+        }
     }
 }

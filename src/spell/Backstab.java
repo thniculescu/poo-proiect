@@ -1,10 +1,30 @@
 package spell;
 
-import hero.Hero;
+import hero.*;
 
-public class Backstab implements Spell {
+public class Backstab extends Spell {
+
+    public Backstab(Hero hero, float amp) {
+        super(hero, amp);
+    }
+
     @Override
-    public void CastedOn(Hero hero) {
+    public void CastedOn(Knight hero) {
+
+    }
+
+    @Override
+    public void CastedOn(Wizard hero) {
+
+    }
+
+    @Override
+    public void CastedOn(Rogue hero) {
+
+    }
+
+    @Override
+    public void CastedOn(Pyromancer hero) {
 
     }
 }

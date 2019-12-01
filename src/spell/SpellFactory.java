@@ -2,6 +2,8 @@ package spell;
 
 import hero.Hero;
 
+import java.lang.invoke.SwitchPoint;
+
 public class SpellFactory {
     private static SpellFactory instance = null;
 
@@ -15,14 +17,27 @@ public class SpellFactory {
         return instance;
     }
 
-    public Spell get(SpellTypes type, Hero hero) {
+    public Spell get(SpellTypes type, Hero hero, float amp) {
 
-        return new Spell() {
-            @Override
-            public void CastedOn(Hero hero) {
-
-            }
-        };
+        switch (type) {
+            case Slam:
+                return new Slam(hero, amp);
+            case Execute:
+                return new Execute(hero, amp);
+            case Drain:
+                return new Drain(hero, amp);
+            case Ignite:
+                return new Ignite(hero, amp);
+            case Deflect:
+                return new Deflect(hero, amp);
+            case Backstab:
+                return new Backstab(hero, amp);
+            case Fireblast:
+                return new Fireblast(hero, amp);
+            case Paralysis:
+                return new Paralysis(hero, amp);
+        }
+        return null;
     }
 
 }

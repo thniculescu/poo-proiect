@@ -13,6 +13,10 @@ public class TerrainMap {
     private TerrainMap() {
     }
 
+    public TerrainTypes getTerrain(int x, int y) {
+        return terrain[x][y];
+    }
+
     public void setTerrain(ArrayList<String> input) {
         height = input.size();
         width = input.get(0).length();
