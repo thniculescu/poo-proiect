@@ -13,6 +13,7 @@ public abstract class Hero {
     protected int igniteRounds;
     protected int paralysisDamage;
     protected int paralysisRounds;
+    protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
 
     public Hero(int x, int y) {
@@ -24,6 +25,22 @@ public abstract class Hero {
         igniteRounds = 0;
         paralysisDamage = 0;
         paralysisRounds = 0;
+    }
+
+    public Hero(Hero hero) {
+        this.hp = hero.hp;
+        this.xp = hero.xp;
+        this.x = hero.x;
+        this.y = hero.y;
+        this.level = hero.level;
+        this.hpPerLevel = hero.hpPerLevel;
+        this.maxHp = hero.maxHp;
+        this.igniteDamage = hero.igniteDamage;
+        this.igniteRounds = hero.igniteRounds;
+        this.paralysisDamage = hero.paralysisDamage;
+        this.paralysisRounds = hero.paralysisRounds;
+        this.heroSpells = new ArrayList<>(hero.heroSpells);
+        this.paralyzed = hero.paralyzed;
     }
 
     public int getHp() {
@@ -53,23 +70,16 @@ public abstract class Hero {
         }
 
         if(paralysisRounds > 0) {
+            paralyzed = true;
             hp -= paralysisDamage;
             paralysisRounds--;
+        } else {
+            paralyzed = false;
         }
     }
 
     public boolean alive() {
-        if(hp > 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean stunned() {
-        if(paralysisRounds > 0) {
-            return true;
-        }
-        return false;
+        return hp > 0;
     }
 
     @Override
@@ -81,7 +91,7 @@ public abstract class Hero {
         }
     }
 
-    abstract public void isAffectedBy(ArrayList<Spell> spells);
+    abstract public Hero isAffectedBy(ArrayList<Spell> spells);
 
     public ArrayList<Spell> getSpells(float amp) {
         ArrayList<Spell> spellsToCast = new ArrayList<>();
@@ -93,18 +103,33 @@ public abstract class Hero {
     }
 
     public void Move(Move move) {
-        if(move == null) {
+        if(move == null || this.paralyzed) {
             return;
         }
         x += move.x;
         y += move.y;
     }
 
-    public void levelUp() {
+    public void gainXp(int addedXp) {
+        xp += addedXp;
         if(xp > XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
             level++;
             maxHp += hpPerLevel;
             hp = maxHp;
         }
+    }
+
+    public void Paralyze(float paralysisDamage, int paralysisRounds) {
+        this.paralysisDamage = Math.round(paralysisDamage);
+        this.paralysisRounds = paralysisRounds;
+    }
+
+    public void Ignite(float igniteDamage, int igniteRounds) {
+        this.igniteDamage = Math.round(igniteDamage);
+        this.igniteRounds = igniteRounds;
+    }
+
+    public void takeDamage(float damage) {
+        hp -= Math.round(damage);
     }
 }

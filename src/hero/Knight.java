@@ -2,7 +2,6 @@ package hero;
 
 import constants.HeroInputConstants;
 import constants.HeroStatsConstants;
-import constants.MapConstants;
 import constants.SpellConstants;
 import main.TerrainMap;
 import main.TerrainTypes;
@@ -21,10 +20,12 @@ public class Knight extends Hero {
     }
 
     @Override
-    public void isAffectedBy(ArrayList<Spell> spells) {
+    public Knight isAffectedBy(ArrayList<Spell> spells) {
+        Knight temp = new Knight(this);
         for(Spell spell : spells) {
-            spell.CastedOn(this);
+            temp = spell.CastedOn(temp);
         }
+        return temp;
     }
 
     public Knight(int x, int y) {
@@ -34,6 +35,10 @@ public class Knight extends Hero {
         maxHp = HeroStatsConstants.KNIGHTBASE;
         hpPerLevel = HeroStatsConstants.KNIGHTLVL;
         hp = maxHp;
+    }
+
+    public Knight(Knight knight) {
+        super(knight);
     }
 
     @Override

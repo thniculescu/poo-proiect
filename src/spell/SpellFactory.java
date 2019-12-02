@@ -2,8 +2,6 @@ package spell;
 
 import hero.Hero;
 
-import java.lang.invoke.SwitchPoint;
-
 public class SpellFactory {
     private static SpellFactory instance = null;
 

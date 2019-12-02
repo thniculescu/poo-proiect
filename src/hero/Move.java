@@ -1,7 +1,8 @@
 package hero;
 
 public class Move {
-    int x, y;
+    final int x;
+    final int y;
 
     public Move(int x, int y) {
         this.x = x;

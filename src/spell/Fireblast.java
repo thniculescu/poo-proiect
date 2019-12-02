@@ -7,27 +7,31 @@ public class Fireblast extends Spell {
 
     public Fireblast(Hero hero, float amp) {
         super(hero, amp);
-        System.out.println(hero + " casted IGNITE");
         damage = SpellConstants.FIREBLASTBASE + hero.getLevel() * SpellConstants.FIREBLASTLVL;
+        damage *= terrainAmp;
     }
 
     @Override
-    public void CastedOn(Knight hero) {
-
+    public Knight CastedOn(Knight hero) {
+        hero.takeDamage(damage * SpellConstants.FIREBLASTKNIGHT);
+        return  hero;
     }
 
     @Override
-    public void CastedOn(Wizard hero) {
-
+    public Pyromancer CastedOn(Pyromancer hero) {
+        hero.takeDamage(damage * SpellConstants.FIREBLASTPYROMANCER);
+        return  hero;
     }
 
     @Override
-    public void CastedOn(Rogue hero) {
-
+    public Wizard CastedOn(Wizard hero) {
+        hero.takeDamage(damage * SpellConstants.FIREBLASTWIZARD);
+        return  hero;
     }
 
     @Override
-    public void CastedOn(Pyromancer hero) {
-
+    public Rogue CastedOn(Rogue hero) {
+        hero.takeDamage(damage * SpellConstants.FIREBLASTROGUE);
+        return hero;
     }
 }

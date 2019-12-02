@@ -1,30 +1,41 @@
 package spell;
 
+import constants.SpellConstants;
 import hero.*;
 
 public class Slam extends Spell {
 
     public Slam(Hero hero, float amp) {
         super(hero, amp);
+        damage = SpellConstants.SLAMBASE + hero.getLevel() * SpellConstants.SLAMLVL;
+        damage *= terrainAmp;
     }
 
     @Override
-    public void CastedOn(Knight hero) {
-
+    public Knight CastedOn(Knight hero) {
+        hero.takeDamage(damage * SpellConstants.SLAMKNIGHT);
+        hero.Paralyze(0, SpellConstants.SLAMROUNDS);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Wizard hero) {
-
+    public Pyromancer CastedOn(Pyromancer hero) {
+        hero.takeDamage(damage * SpellConstants.SLAMPYROMANCER);
+        hero.Paralyze(0, SpellConstants.SLAMROUNDS);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Rogue hero) {
-
+    public Wizard CastedOn(Wizard hero) {
+        hero.takeDamage(damage * SpellConstants.SLAMWIZARD);
+        hero.Paralyze(0, SpellConstants.SLAMROUNDS);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Pyromancer hero) {
-
+    public Rogue CastedOn(Rogue hero) {
+        hero.takeDamage(damage * SpellConstants.SLAMROGUE);
+        hero.Paralyze(0, SpellConstants.SLAMROUNDS);
+        return hero;
     }
 }

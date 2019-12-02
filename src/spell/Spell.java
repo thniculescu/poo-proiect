@@ -2,20 +2,26 @@ package spell;
 
 import hero.*;
 
-import java.util.ArrayList;
-
 public abstract class Spell {
     protected final Hero castedBy;
     protected float damage = 0;
-    protected float amp;
+    protected float terrainAmp;
 
     public Spell(Hero hero, float amp) {
         castedBy = hero;
-        this.amp = amp;
+        this.terrainAmp = amp;
     }
 
-    public void CastedOn(Knight hero) {}
-    public void CastedOn(Wizard hero) {}
-    public void CastedOn(Rogue hero) {}
-    public void CastedOn(Pyromancer hero) {}
+    public Knight CastedOn(Knight hero) {
+        return hero;
+    }
+    public Wizard CastedOn(Wizard hero) {
+        return hero;
+    }
+    public Rogue CastedOn(Rogue hero) {
+        return hero;
+    }
+    public Pyromancer CastedOn(Pyromancer hero) {
+        return hero;
+    }
 }

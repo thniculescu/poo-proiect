@@ -1,13 +1,16 @@
 package main;
 
+import constants.XpConstants;
 import hero.Hero;
 import hero.Move;
 import spell.Spell;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.max;
+
 public class Main {
-    public static void main (String args[]) {
+    public static void main (String[] args) {
         FileIO fileIO = new FileIO(args[0], args[1]);
         fileIO.ReadInput();
 
@@ -17,8 +20,8 @@ public class Main {
 
         for(int i = 0; i < numRounds; i++) {
             for(int j = 0; j < heroes.size(); j++) {
-                heroes.get(j).Move(moves.get(i).get(j));
                 heroes.get(j).applyStatus();
+                heroes.get(j).Move(moves.get(i).get(j));
             }
 
             for(int j = 0; j < heroes.size(); j++) {
@@ -28,17 +31,33 @@ public class Main {
                     if(first.getX() == second.getX()
                     && first.getY() == second.getY()
                     && first.alive() && second.alive()) {
-                        ArrayList<Spell> firstSpells = first.getSpells(1);
-                        ArrayList<Spell> secondSpells = second.getSpells(1);
-                        first.isAffectedBy(secondSpells);
-                        second.isAffectedBy(firstSpells);
+
+                        ArrayList<Spell> firstSpells = first.getSpells(1f);
+                        ArrayList<Spell> secondSpells = second.getSpells(1f);
+                        first = first.isAffectedBy(secondSpells);
+                        second = second.isAffectedBy(firstSpells);
+
+                        int potentialXp1 = max(0, XpConstants.GAINXP - (first.getLevel() - second.getLevel()) * XpConstants.LVLDIFMULTIPLIER);
+                        int potentialXp2 = max(0, XpConstants.GAINXP - (second.getLevel() - first.getLevel()) * XpConstants.LVLDIFMULTIPLIER);
+
+                        if(first.alive() && !second.alive()) {
+                            first.gainXp(potentialXp1);
+                        }
+                        if(!first.alive() && second.alive()) {
+                            second.gainXp(potentialXp2);
+                        }
+
+                        heroes.set(j, first);
+                        heroes.set(k, second);
                     }
                 }
             }
         }
 
-        for(int i = 0; i < heroes.size(); i++) {
-            System.out.println(heroes.get(i));
+        for (Hero hero : heroes) {
+            System.out.println(hero);
         }
+
+        fileIO.printOutput();
     }
 }

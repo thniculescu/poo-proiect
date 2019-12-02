@@ -12,7 +12,12 @@ import java.util.ArrayList;
 
 public class Rogue extends Hero {
 
-    int backstabCounter = 0;
+    int backstabCounter = 1;
+
+    public Rogue(Rogue rogue) {
+        super(rogue);
+        backstabCounter = rogue.backstabCounter;
+    }
 
     @Override
     public ArrayList<Spell> getSpells(float amp) {
@@ -23,11 +28,15 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public void isAffectedBy(ArrayList<Spell> spells) {
+    public Rogue isAffectedBy(ArrayList<Spell> spells) {
+        Rogue temp = new Rogue(this);
         for(Spell spell : spells) {
-            spell.CastedOn(this);
+            temp = spell.CastedOn(temp);
         }
+        return temp;
     }
+
+
 
     public Rogue(int x, int y) {
         super(x, y);
@@ -36,6 +45,18 @@ public class Rogue extends Hero {
         maxHp = HeroStatsConstants.ROGUEBASE;
         hpPerLevel = HeroStatsConstants.ROGUELVL;
         hp = maxHp;
+    }
+
+    public int getBackstabCounter() {
+        return backstabCounter;
+    }
+
+    public void resetBackstabCounter() {
+        backstabCounter = 1;
+    }
+
+    public void increaseBackstabCounter() {
+        backstabCounter++;
     }
 
     @Override

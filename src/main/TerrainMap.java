@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class TerrainMap {
     private static TerrainMap instance = null;
     private TerrainTypes[][] terrain;
-    private int height;
-    private int width;
 
     private TerrainMap() {
     }
@@ -18,8 +16,8 @@ public class TerrainMap {
     }
 
     public void setTerrain(ArrayList<String> input) {
-        height = input.size();
-        width = input.get(0).length();
+        int height = input.size();
+        int width = input.get(0).length();
 
         terrain = new TerrainTypes[height][width];
 

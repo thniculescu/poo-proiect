@@ -12,9 +12,12 @@ import java.util.ArrayList;
 
 public class Pyromancer extends Hero {
 
+    public Pyromancer(Pyromancer pyromancer) {
+        super(pyromancer);
+    }
+
     @Override
     public ArrayList<Spell> getSpells(float amp) {
-        System.out.println("WOHOO PYRO SPELLS");
         if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Volcanic) {
             amp += SpellConstants.PYROVOLCANICBONUS;
         }
@@ -22,10 +25,12 @@ public class Pyromancer extends Hero {
     }
 
     @Override
-    public void isAffectedBy(ArrayList<Spell> spells) {
+    public Pyromancer isAffectedBy(ArrayList<Spell> spells) {
+        Pyromancer temp = new Pyromancer(this);
         for(Spell spell : spells) {
-            spell.CastedOn(this);
+            temp = spell.CastedOn(temp);
         }
+        return temp;
     }
 
     public Pyromancer(int x, int y) {

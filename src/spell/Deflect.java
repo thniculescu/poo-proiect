@@ -1,30 +1,34 @@
 package spell;
 
+import constants.SpellConstants;
 import hero.*;
 
 public class Deflect extends Spell {
 
     public Deflect(Hero hero, float amp) {
         super(hero, amp);
+        damage = SpellConstants.DEFLECTBASE + hero.getLevel() * SpellConstants.DEFLECTLVL;
+        damage = Math.min(damage, SpellConstants.DEFLECTMAX);
+        damage *= terrainAmp;
     }
 
     @Override
-    public void CastedOn(Knight hero) {
-
+    public Knight CastedOn(Knight hero) {
+        return super.CastedOn(hero);
     }
 
     @Override
-    public void CastedOn(Wizard hero) {
-
+    public Pyromancer CastedOn(Pyromancer hero) {
+        return super.CastedOn(hero);
     }
 
     @Override
-    public void CastedOn(Rogue hero) {
-
+    public Wizard CastedOn(Wizard hero) {
+        return hero;
     }
 
     @Override
-    public void CastedOn(Pyromancer hero) {
-
+    public Rogue CastedOn(Rogue hero) {
+        return super.CastedOn(hero);
     }
 }

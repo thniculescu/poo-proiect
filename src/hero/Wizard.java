@@ -11,6 +11,11 @@ import spell.SpellTypes;
 import java.util.ArrayList;
 
 public class Wizard extends Hero {
+
+    public Wizard(final Wizard wizard) {
+        super(wizard);
+    }
+
     @Override
     public ArrayList<Spell> getSpells(float amp) {
         if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Desert) {
@@ -20,10 +25,12 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void isAffectedBy(ArrayList<Spell> spells) {
+    public Wizard isAffectedBy(ArrayList<Spell> spells) {
+        Wizard temp = new Wizard(this);
         for(Spell spell : spells) {
-            spell.CastedOn(this);
+            temp = spell.CastedOn(temp);
         }
+        return temp;
     }
 
     public Wizard(int x, int y) {

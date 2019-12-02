@@ -1,6 +1,5 @@
 package main;
 
-import constants.HeroInputConstants;
 import hero.*;
 
 import java.io.File;
@@ -32,14 +31,13 @@ public class FileIO {
         try {
             input = new Scanner(new File(in));
             output = new PrintWriter(new File(out));
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
     public void ReadInput() {
-        int n, m;
+        int n;
         n = input.nextInt();
-        m = input.nextInt();
         input.nextLine();
         ArrayList<String> inputMap = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -82,5 +80,12 @@ public class FileIO {
             }
             moves.add(roundMoves);
         }
+    }
+
+    public void printOutput() {
+        for (Hero hero : heroes) {
+            output.println(hero);
+        }
+        output.flush();
     }
 }

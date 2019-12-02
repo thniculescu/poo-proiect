@@ -1,30 +1,41 @@
 package spell;
 
+import constants.SpellConstants;
 import hero.*;
 
 public class Drain extends Spell {
 
     public Drain(Hero hero, float amp) {
         super(hero, amp);
+        damage = SpellConstants.DRAINBASE + hero.getLevel() * SpellConstants.DRAINLVL;
+        damage *= terrainAmp;
     }
 
     @Override
-    public void CastedOn(Knight hero) {
-
+    public Knight CastedOn(Knight hero) {
+        damage *= Math.min(SpellConstants.DRAINHPPERCENT * hero.getMaxHp(), hero.getHp());
+        hero.takeDamage(damage * SpellConstants.DRAINKNIGHT);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Wizard hero) {
-
+    public Pyromancer CastedOn(Pyromancer hero) {
+        damage *= Math.min(SpellConstants.DRAINHPPERCENT * hero.getMaxHp(), hero.getHp());
+        hero.takeDamage(damage * SpellConstants.DRAINPYROMANCER);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Rogue hero) {
-
+    public Wizard CastedOn(Wizard hero) {
+        damage *= Math.min(SpellConstants.DRAINHPPERCENT * hero.getMaxHp(), hero.getHp());
+        hero.takeDamage(damage * SpellConstants.DRAINWIZARD);
+        return hero;
     }
 
     @Override
-    public void CastedOn(Pyromancer hero) {
-
+    public Rogue CastedOn(Rogue hero) {
+        damage *= Math.min(SpellConstants.DRAINHPPERCENT * hero.getMaxHp(), hero.getHp());
+        hero.takeDamage(damage * SpellConstants.DRAINROGUE);
+        return hero;
     }
 }
