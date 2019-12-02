@@ -4,27 +4,27 @@ import constants.MapConstants;
 
 import java.util.ArrayList;
 
-public class TerrainMap {
+public final class TerrainMap {
     private static TerrainMap instance = null;
     private TerrainTypes[][] terrain;
 
     private TerrainMap() {
     }
 
-    public TerrainTypes getTerrain(int x, int y) {
+    public TerrainTypes getTerrain(final int x, final int y) {
         return terrain[x][y];
     }
 
-    public void setTerrain(ArrayList<String> input) {
+    public void setTerrain(final ArrayList<String> input) {
         int height = input.size();
         int width = input.get(0).length();
 
         terrain = new TerrainTypes[height][width];
 
-        for(int i = 0; i < height; i++) {
+        for (int i = 0; i < height; i++) {
             String curLine = input.get(i);
-            for(int j = 0; j < width; j++) {
-                TerrainTypes cur = null;
+            for (int j = 0; j < width; j++) {
+                TerrainTypes cur;
                 switch (curLine.charAt(j)) {
                     case MapConstants.LAND:
                         cur = TerrainTypes.Land;
@@ -38,6 +38,8 @@ public class TerrainMap {
                     case MapConstants.DESERT:
                         cur = TerrainTypes.Desert;
                         break;
+                    default:
+                        cur = null;
                 }
                 terrain[i][j] = cur;
             }
@@ -45,7 +47,7 @@ public class TerrainMap {
     }
 
     public static TerrainMap getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new TerrainMap();
         }
         return instance;

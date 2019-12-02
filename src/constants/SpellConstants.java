@@ -1,6 +1,7 @@
 package constants;
 
-public class SpellConstants {
+public final class SpellConstants {
+    private SpellConstants() { }
     public static final float FIREBLASTBASE = 350;
     public static final float FIREBLASTLVL = 50;
 

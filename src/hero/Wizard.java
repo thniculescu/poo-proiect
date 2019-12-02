@@ -10,30 +10,31 @@ import spell.SpellTypes;
 
 import java.util.ArrayList;
 
-public class Wizard extends Hero {
+public final class Wizard extends Hero {
 
     public Wizard(final Wizard wizard) {
         super(wizard);
     }
 
     @Override
-    public ArrayList<Spell> getSpells(float amp) {
-        if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Desert) {
-            amp += SpellConstants.WIZARDDESERTBONUS;
+    public ArrayList<Spell> getSpells(final float amp) {
+        float newamp = amp;
+        if (TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Desert) {
+            newamp += SpellConstants.WIZARDDESERTBONUS;
         }
-        return super.getSpells(amp);
+        return super.getSpells(newamp);
     }
 
     @Override
-    public Wizard isAffectedBy(ArrayList<Spell> spells) {
+    public Wizard isAffectedBy(final ArrayList<Spell> spells) {
         Wizard temp = new Wizard(this);
-        for(Spell spell : spells) {
-            temp = spell.CastedOn(temp);
+        for (Spell spell : spells) {
+            temp = spell.castedOn(temp);
         }
         return temp;
     }
 
-    public Wizard(int x, int y) {
+    public Wizard(final int x, final int y) {
         super(x, y);
         heroSpells.add(SpellTypes.Drain);
         heroSpells.add(SpellTypes.Deflect);

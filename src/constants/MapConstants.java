@@ -1,6 +1,7 @@
 package constants;
 
-public class MapConstants {
+public final class MapConstants {
+    private MapConstants() { }
     public static final char VOLCANIC = 'V';
     public static final char DESERT = 'D';
     public static final char WOODS = 'W';

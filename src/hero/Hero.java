@@ -17,7 +17,7 @@ public abstract class Hero {
     protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
 
-    public Hero(int x, int y) {
+    public Hero(final int x, final int y) {
         this.x = x;
         this.y = y;
         level = 0;
@@ -29,7 +29,7 @@ public abstract class Hero {
         fights = 0;
     }
 
-    public Hero(Hero hero) {
+    public Hero(final Hero hero) {
         this.hp = hero.hp;
         this.xp = hero.xp;
         this.x = hero.x;
@@ -46,41 +46,41 @@ public abstract class Hero {
         this.fights = hero.fights;
     }
 
-    public int getFights() {
+    public final int getFights() {
         return fights;
     }
 
-    public void increaseFights() {
+    public final void increaseFights() {
         fights++;
     }
 
-    public int getHp() {
+    public final int getHp() {
         return hp;
     }
 
-    public int getX() {
+    public final int getX() {
         return x;
     }
 
-    public int getY() {
+    public final int getY() {
         return y;
     }
 
-    public int getLevel() {
+    public final int getLevel() {
         return level;
     }
 
-    public int getMaxHp() {
+    public final int getMaxHp() {
         return maxHp;
     }
 
-    public void applyStatus() {
-        if(igniteRounds > 0) {
+    public final void applyStatus() {
+        if (igniteRounds > 0) {
             hp -= igniteDamage;
             igniteRounds--;
         }
 
-        if(paralysisRounds > 0) {
+        if (paralysisRounds > 0) {
             paralyzed = true;
             hp -= paralysisDamage;
             paralysisRounds--;
@@ -89,10 +89,11 @@ public abstract class Hero {
         }
     }
 
-    public boolean alive() {
+    public final boolean alive() {
         return hp > 0;
     }
 
+    /** **/
     @Override
     public String toString() {
         if (hp > 0) {
@@ -102,45 +103,46 @@ public abstract class Hero {
         }
     }
 
-    abstract public Hero isAffectedBy(ArrayList<Spell> spells);
+    public abstract Hero isAffectedBy(ArrayList<Spell> spells);
 
-    public ArrayList<Spell> getSpells(float amp) {
+    /** **/
+    public ArrayList<Spell> getSpells(final float amp) {
         ArrayList<Spell> spellsToCast = new ArrayList<>();
-        for(SpellTypes type : heroSpells) {
+        for (SpellTypes type : heroSpells) {
             Spell spell = SpellFactory.getInstance().get(type, this, amp);
             spellsToCast.add(spell);
         }
         return spellsToCast;
     }
 
-    public void Move(Move move) {
-        if(move == null || this.paralyzed) {
+    public final void move(final Move move) {
+        if (move == null || this.paralyzed) {
             return;
         }
-        x += move.x;
-        y += move.y;
+        x += move.getX();
+        y += move.getY();
     }
 
-    public void gainXp(int addedXp) {
+    public final void gainXp(final int addedXp) {
         xp += addedXp;
-        while(xp >= XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
+        while (xp >= XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
             level++;
             maxHp += hpPerLevel;
             hp = maxHp;
         }
     }
 
-    public void Paralyze(float paralysisDamage, int paralysisRounds) {
-        this.paralysisDamage = Math.round(paralysisDamage);
-        this.paralysisRounds = paralysisRounds;
+    public final void paralyze(final float damage, final int duration) {
+        this.paralysisDamage = Math.round(damage);
+        this.paralysisRounds = duration;
     }
 
-    public void Ignite(float igniteDamage, int igniteRounds) {
-        this.igniteDamage = Math.round(igniteDamage);
-        this.igniteRounds = igniteRounds;
+    public final void ignite(final float damage, final int duration) {
+        this.igniteDamage = Math.round(damage);
+        this.igniteRounds = duration;
     }
 
-    public void takeDamage(float damage) {
+    public final void takeDamage(final float damage) {
         hp -= Math.round(damage);
     }
 }

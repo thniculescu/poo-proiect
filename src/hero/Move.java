@@ -1,19 +1,19 @@
 package hero;
 
 public class Move {
-    final int x;
-    final int y;
+    private final int x;
+    private final int y;
 
-    public Move(int x, int y) {
+    public Move(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
-    @Override
-    public String toString() {
-        return "Move{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public final int getX() {
+        return x;
+    }
+
+    public final int getY() {
+        return y;
     }
 }

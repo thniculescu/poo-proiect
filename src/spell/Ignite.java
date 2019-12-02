@@ -1,47 +1,52 @@
 package spell;
 
 import constants.SpellConstants;
-import hero.*;
+import hero.Hero;
+import hero.Rogue;
+import hero.Pyromancer;
+import hero.Knight;
+import hero.Wizard;
 
-public class Ignite extends Spell {
+public final class Ignite extends Spell {
 
     private float damageOverTime;
     private final int numRounds;
 
-    public Ignite(Hero hero, float amp) {
+    public Ignite(final Hero hero, final float amp) {
         super(hero, amp);
         damage = SpellConstants.IGNITEBASE + SpellConstants.IGNITELVL * hero.getLevel();
         damage *= terrainAmp;
-        damageOverTime = SpellConstants.IGNITEDOTBASE + SpellConstants.IGNITEDOTLVL * hero.getLevel();
+        damageOverTime = SpellConstants.IGNITEDOTBASE
+                + SpellConstants.IGNITEDOTLVL * hero.getLevel();
         damageOverTime *= terrainAmp;
         numRounds = SpellConstants.IGNITEROUNDS;
     }
 
     @Override
-    public Knight CastedOn(Knight hero) {
+    public Knight castedOn(final Knight hero) {
         hero.takeDamage(damage * SpellConstants.IGNITEKNIGHT);
-        hero.Ignite(damageOverTime * SpellConstants.IGNITEKNIGHT, numRounds);
+        hero.ignite(damageOverTime * SpellConstants.IGNITEKNIGHT, numRounds);
         return hero;
     }
 
     @Override
-    public Pyromancer CastedOn(Pyromancer hero) {
+    public Pyromancer castedOn(final Pyromancer hero) {
         hero.takeDamage(damage * SpellConstants.IGNITEPYROMANCER);
-        hero.Ignite(damageOverTime * SpellConstants.IGNITEPYROMANCER, numRounds);
+        hero.ignite(damageOverTime * SpellConstants.IGNITEPYROMANCER, numRounds);
         return hero;
     }
 
     @Override
-    public Wizard CastedOn(Wizard hero) {
+    public Wizard castedOn(final Wizard hero) {
         hero.takeDamage(damage * SpellConstants.IGNITEWIZARD);
-        hero.Ignite(damageOverTime * SpellConstants.IGNITEWIZARD, numRounds);
+        hero.ignite(damageOverTime * SpellConstants.IGNITEWIZARD, numRounds);
         return hero;
     }
 
     @Override
-    public Rogue CastedOn(Rogue hero) {
+    public Rogue castedOn(final Rogue hero) {
         hero.takeDamage(damage * SpellConstants.IGNITEROGUE);
-        hero.Ignite(damageOverTime * SpellConstants.IGNITEROGUE, numRounds);
+        hero.ignite(damageOverTime * SpellConstants.IGNITEROGUE, numRounds);
         return hero;
     }
 }

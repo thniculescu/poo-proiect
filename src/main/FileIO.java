@@ -1,13 +1,14 @@
 package main;
 
-import hero.*;
-
+import hero.Hero;
+import hero.HeroFactory;
+import hero.Move;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO {
+public final class FileIO {
 
     private Scanner input;
     private PrintWriter output;
@@ -27,7 +28,7 @@ public class FileIO {
         return moves;
     }
 
-    public FileIO(String in, String out) {
+    public FileIO(final String in, final String out) {
         try {
             input = new Scanner(new File(in));
             output = new PrintWriter(new File(out));
@@ -35,7 +36,7 @@ public class FileIO {
         }
     }
 
-    public void ReadInput() {
+    public void readInput() {
         int n;
         n = input.nextInt();
         input.nextLine();
@@ -57,11 +58,11 @@ public class FileIO {
         }
 
         numRounds = Integer.parseInt(input.nextLine());
-        for(int i = 0; i < numRounds; i++) {
+        for (int i = 0; i < numRounds; i++) {
             String inputMoves = input.nextLine();
             ArrayList<Move> roundMoves = new ArrayList<>();
-            for(int j = 0; j < inputMoves.length(); j++) {
-                Move cur = null;
+            for (int j = 0; j < inputMoves.length(); j++) {
+                Move cur;
                 switch (inputMoves.charAt(j)) {
                     case 'U':
                         cur = new Move(-1, 0);
@@ -75,6 +76,8 @@ public class FileIO {
                     case 'R':
                         cur = new Move(0, 1);
                         break;
+                    default:
+                        cur = null;
                 }
                 roundMoves.add(cur);
             }

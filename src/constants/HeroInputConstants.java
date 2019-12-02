@@ -1,6 +1,7 @@
 package constants;
 
-public class HeroInputConstants {
+public final class HeroInputConstants {
+    private HeroInputConstants() { }
     public static final char PYROMANCER = 'P';
     public static final char WIZARD = 'W';
     public static final char KNIGHT = 'K';

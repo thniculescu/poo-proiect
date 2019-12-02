@@ -12,28 +12,29 @@ import java.util.ArrayList;
 
 public class Rogue extends Hero {
 
-    public Rogue(Rogue rogue) {
+    public Rogue(final Rogue rogue) {
         super(rogue);
     }
 
     @Override
-    public ArrayList<Spell> getSpells(float amp) {
-        if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Woods) {
-            amp += SpellConstants.ROGUEWOODSBONUS;
+    public final ArrayList<Spell> getSpells(final float amp) {
+        float newamp = amp;
+        if (TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Woods) {
+            newamp += SpellConstants.ROGUEWOODSBONUS;
         }
-        return super.getSpells(amp);
+        return super.getSpells(newamp);
     }
 
     @Override
-    public Rogue isAffectedBy(ArrayList<Spell> spells) {
+    public final Rogue isAffectedBy(final ArrayList<Spell> spells) {
         Rogue temp = new Rogue(this);
-        for(Spell spell : spells) {
-            temp = spell.CastedOn(temp);
+        for (Spell spell : spells) {
+            temp = spell.castedOn(temp);
         }
         return temp;
     }
 
-    public Rogue(int x, int y) {
+    public Rogue(final int x, final int y) {
         super(x, y);
         heroSpells.add(SpellTypes.Backstab);
         heroSpells.add(SpellTypes.Paralysis);
@@ -43,7 +44,7 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return HeroInputConstants.ROGUE + " " + super.toString();
     }
 }

@@ -1,6 +1,7 @@
 package constants;
 
-public class HeroStatsConstants {
+public final class HeroStatsConstants {
+    private HeroStatsConstants() { }
     public static final int KNIGHTBASE = 900;
     public static final int KNIGHTLVL = 80;
 

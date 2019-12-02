@@ -1,22 +1,21 @@
 package spell;
 
 import hero.Hero;
-import hero.Rogue;
 
-public class SpellFactory {
+public final class SpellFactory {
     private static SpellFactory instance = null;
 
     private SpellFactory() {
     }
 
     public static SpellFactory getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new SpellFactory();
         }
         return instance;
     }
 
-    public Spell get(SpellTypes type, Hero hero, float amp) {
+    public Spell get(final SpellTypes type, final Hero hero, final float amp) {
 
         switch (type) {
             case Slam:
@@ -35,8 +34,8 @@ public class SpellFactory {
                 return new Fireblast(hero, amp);
             case Paralysis:
                 return new Paralysis(hero, amp);
+            default:
+                return null;
         }
-        return null;
     }
-
 }

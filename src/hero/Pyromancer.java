@@ -12,28 +12,29 @@ import java.util.ArrayList;
 
 public class Pyromancer extends Hero {
 
-    public Pyromancer(Pyromancer pyromancer) {
+    public Pyromancer(final Pyromancer pyromancer) {
         super(pyromancer);
     }
 
     @Override
-    public ArrayList<Spell> getSpells(float amp) {
-        if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Volcanic) {
-            amp += SpellConstants.PYROVOLCANICBONUS;
+    public final ArrayList<Spell> getSpells(final float amp) {
+        float newamp = amp;
+        if (TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Volcanic) {
+            newamp += SpellConstants.PYROVOLCANICBONUS;
         }
-        return super.getSpells(amp);
+        return super.getSpells(newamp);
     }
 
     @Override
-    public Pyromancer isAffectedBy(ArrayList<Spell> spells) {
+    public final Pyromancer isAffectedBy(final ArrayList<Spell> spells) {
         Pyromancer temp = new Pyromancer(this);
-        for(Spell spell : spells) {
-            temp = spell.CastedOn(temp);
+        for (Spell spell : spells) {
+            temp = spell.castedOn(temp);
         }
         return temp;
     }
 
-    public Pyromancer(int x, int y) {
+    public Pyromancer(final int x, final int y) {
         super(x, y);
         heroSpells.add(SpellTypes.Fireblast);
         heroSpells.add(SpellTypes.Ignite);
@@ -43,7 +44,7 @@ public class Pyromancer extends Hero {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return HeroInputConstants.PYROMANCER + " " + super.toString();
     }
 }

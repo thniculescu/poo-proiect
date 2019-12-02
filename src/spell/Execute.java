@@ -1,27 +1,39 @@
 package spell;
 
 import constants.SpellConstants;
-import hero.*;
+import hero.Hero;
+import hero.Knight;
+import hero.Pyromancer;
+import hero.Rogue;
+import hero.Wizard;
 
 import static java.lang.Math.max;
 
-public class Execute extends Spell {
+public final class Execute extends Spell {
 
-    float threshhold;
+    public float getThreshhold() {
+        return threshhold;
+    }
 
-    public Execute(Hero hero, float amp) {
+    private float threshhold;
+
+    public Execute(final Hero hero, final float amp) {
         super(hero, amp);
-        damage = SpellConstants.EXECUTEBASE + hero.getLevel() * SpellConstants.EXECUTELVL;
+        damage = SpellConstants.EXECUTEBASE + hero.getLevel()
+                * SpellConstants.EXECUTELVL;
         damage *= terrainAmp;
-        threshhold = max(SpellConstants.EXECUTEPERCENTAGEBASE + hero.getLevel() * SpellConstants.EXECUTEPERCENTAGELVL, SpellConstants.EXECUTEMAX);
+        threshhold = max(SpellConstants.EXECUTEPERCENTAGEBASE
+                + hero.getLevel()
+                * SpellConstants.EXECUTEPERCENTAGELVL,
+                SpellConstants.EXECUTEMAX);
     }
 
     @Override
-    public Knight CastedOn(Knight hero) {
+    public Knight castedOn(final Knight hero) {
         float damage;
-        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
+        if (hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
-        } else{
+        } else {
             damage = this.damage * SpellConstants.EXECUTEKNIGHT;
         }
         hero.takeDamage(damage);
@@ -29,11 +41,11 @@ public class Execute extends Spell {
     }
 
     @Override
-    public Pyromancer CastedOn(Pyromancer hero) {
+    public Pyromancer castedOn(final Pyromancer hero) {
         float damage;
-        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
+        if (hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
-        } else{
+        } else {
             damage = this.damage * SpellConstants.EXECUTEPYROMANCER;
         }
         hero.takeDamage(damage);
@@ -41,11 +53,11 @@ public class Execute extends Spell {
     }
 
     @Override
-    public Wizard CastedOn(Wizard hero) {
+    public Wizard castedOn(final Wizard hero) {
         float damage;
-        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
+        if (hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
-        } else{
+        } else {
             damage = this.damage * SpellConstants.EXECUTEWIZARD;
         }
         hero.takeDamage(damage);
@@ -53,11 +65,11 @@ public class Execute extends Spell {
     }
 
     @Override
-    public Rogue CastedOn(Rogue hero) {
+    public Rogue castedOn(final Rogue hero) {
         float damage;
-        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
+        if (hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
-        } else{
+        } else {
             damage = this.damage * SpellConstants.EXECUTEROGUE;
         }
         hero.takeDamage(damage);

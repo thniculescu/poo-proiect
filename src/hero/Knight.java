@@ -12,23 +12,24 @@ import java.util.ArrayList;
 
 public class Knight extends Hero {
     @Override
-    public ArrayList<Spell> getSpells(float amp) {
-        if(TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Land) {
-            amp += SpellConstants.KNIGHTLANDBONUS;
+    public final ArrayList<Spell> getSpells(final float amp) {
+        float newamp = amp;
+        if (TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Land) {
+            newamp += SpellConstants.KNIGHTLANDBONUS;
         }
-        return super.getSpells(amp);
+        return super.getSpells(newamp);
     }
 
     @Override
-    public Knight isAffectedBy(ArrayList<Spell> spells) {
+    public final Knight isAffectedBy(final ArrayList<Spell> spells) {
         Knight temp = new Knight(this);
-        for(Spell spell : spells) {
-            temp = spell.CastedOn(temp);
+        for (Spell spell : spells) {
+            temp = spell.castedOn(temp);
         }
         return temp;
     }
 
-    public Knight(int x, int y) {
+    public Knight(final int x, final int y) {
         super(x, y);
         heroSpells.add(SpellTypes.Execute);
         heroSpells.add(SpellTypes.Slam);
@@ -37,12 +38,12 @@ public class Knight extends Hero {
         hp = maxHp;
     }
 
-    public Knight(Knight knight) {
+    public Knight(final Knight knight) {
         super(knight);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return HeroInputConstants.KNIGHT + " " + super.toString();
     }
 }
