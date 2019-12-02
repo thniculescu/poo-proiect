@@ -1,6 +1,7 @@
 package spell;
 
 import hero.Hero;
+import hero.Rogue;
 
 public class SpellFactory {
     private static SpellFactory instance = null;

@@ -19,7 +19,7 @@ public class Execute extends Spell {
     @Override
     public Knight CastedOn(Knight hero) {
         float damage;
-        if(hero.getHp() < Math.round((float) hero.getMaxHp() * threshhold)) {
+        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
         } else{
             damage = this.damage * SpellConstants.EXECUTEKNIGHT;
@@ -31,7 +31,7 @@ public class Execute extends Spell {
     @Override
     public Pyromancer CastedOn(Pyromancer hero) {
         float damage;
-        if(hero.getHp() < Math.round((float) hero.getMaxHp() * threshhold)) {
+        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
         } else{
             damage = this.damage * SpellConstants.EXECUTEPYROMANCER;
@@ -43,7 +43,7 @@ public class Execute extends Spell {
     @Override
     public Wizard CastedOn(Wizard hero) {
         float damage;
-        if(hero.getHp() < Math.round((float) hero.getMaxHp() * threshhold)) {
+        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
         } else{
             damage = this.damage * SpellConstants.EXECUTEWIZARD;
@@ -55,7 +55,7 @@ public class Execute extends Spell {
     @Override
     public Rogue CastedOn(Rogue hero) {
         float damage;
-        if(hero.getHp() < Math.round((float) hero.getMaxHp() * threshhold)) {
+        if(hero.getHp() <= Math.round((float) hero.getMaxHp() * threshhold)) {
             damage = hero.getHp();
         } else{
             damage = this.damage * SpellConstants.EXECUTEROGUE;

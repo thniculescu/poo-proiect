@@ -67,7 +67,6 @@ public class SpellConstants {
     public static final float DEFLECTKNIGHT = 1.4f;
     public static final float DEFLECTROGUE = 1.2f;
     public static final float DEFLECTPYROMANCER = 1.3f;
-    public static final float DEFLECTWIZARD = 0;
 
     public static final float BACKSTABKNIGHT = 0.9f;
     public static final float BACKSTABROGUE = 1.2f;

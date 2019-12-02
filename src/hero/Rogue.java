@@ -12,11 +12,8 @@ import java.util.ArrayList;
 
 public class Rogue extends Hero {
 
-    int backstabCounter = 1;
-
     public Rogue(Rogue rogue) {
         super(rogue);
-        backstabCounter = rogue.backstabCounter;
     }
 
     @Override
@@ -36,8 +33,6 @@ public class Rogue extends Hero {
         return temp;
     }
 
-
-
     public Rogue(int x, int y) {
         super(x, y);
         heroSpells.add(SpellTypes.Backstab);
@@ -45,18 +40,6 @@ public class Rogue extends Hero {
         maxHp = HeroStatsConstants.ROGUEBASE;
         hpPerLevel = HeroStatsConstants.ROGUELVL;
         hp = maxHp;
-    }
-
-    public int getBackstabCounter() {
-        return backstabCounter;
-    }
-
-    public void resetBackstabCounter() {
-        backstabCounter = 1;
-    }
-
-    public void increaseBackstabCounter() {
-        backstabCounter++;
     }
 
     @Override

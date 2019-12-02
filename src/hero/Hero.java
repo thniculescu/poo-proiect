@@ -13,6 +13,7 @@ public abstract class Hero {
     protected int igniteRounds;
     protected int paralysisDamage;
     protected int paralysisRounds;
+    protected int fights;
     protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
 
@@ -25,6 +26,7 @@ public abstract class Hero {
         igniteRounds = 0;
         paralysisDamage = 0;
         paralysisRounds = 0;
+        fights = 0;
     }
 
     public Hero(Hero hero) {
@@ -41,6 +43,15 @@ public abstract class Hero {
         this.paralysisRounds = hero.paralysisRounds;
         this.heroSpells = new ArrayList<>(hero.heroSpells);
         this.paralyzed = hero.paralyzed;
+        this.fights = hero.fights;
+    }
+
+    public int getFights() {
+        return fights;
+    }
+
+    public void increaseFights() {
+        fights++;
     }
 
     public int getHp() {
@@ -64,7 +75,7 @@ public abstract class Hero {
     }
 
     public void applyStatus() {
-        if(igniteRounds > 1) {
+        if(igniteRounds > 0) {
             hp -= igniteDamage;
             igniteRounds--;
         }
@@ -112,7 +123,7 @@ public abstract class Hero {
 
     public void gainXp(int addedXp) {
         xp += addedXp;
-        if(xp > XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
+        while(xp >= XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
             level++;
             maxHp += hpPerLevel;
             hp = maxHp;

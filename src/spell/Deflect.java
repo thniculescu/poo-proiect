@@ -2,6 +2,9 @@ package spell;
 
 import constants.SpellConstants;
 import hero.*;
+import sun.awt.X11.XSystemTrayPeer;
+
+import java.util.ArrayList;
 
 public class Deflect extends Spell {
 
@@ -14,12 +17,30 @@ public class Deflect extends Spell {
 
     @Override
     public Knight CastedOn(Knight hero) {
-        return super.CastedOn(hero);
+        ArrayList<Spell> spells = hero.getSpells(1f);
+        float damageSum = 0;
+        for(Spell spell : spells) {
+            damageSum += spell.damage;
+            damageSum = Math.round(damageSum);
+        }
+        damage *= damageSum;
+        damage *= SpellConstants.DEFLECTKNIGHT;
+        hero.takeDamage(damage);
+        return hero;
     }
 
     @Override
     public Pyromancer CastedOn(Pyromancer hero) {
-        return super.CastedOn(hero);
+        ArrayList<Spell> spells = hero.getSpells(1f);
+        float damageSum = 0;
+        for(Spell spell : spells) {
+            damageSum += spell.damage;
+            damageSum = Math.round(damageSum);
+        }
+        damage *= damageSum;
+        damage *= SpellConstants.DEFLECTPYROMANCER;
+        hero.takeDamage(damage);
+        return hero;
     }
 
     @Override
@@ -29,6 +50,15 @@ public class Deflect extends Spell {
 
     @Override
     public Rogue CastedOn(Rogue hero) {
-        return super.CastedOn(hero);
+        ArrayList<Spell> spells = hero.getSpells(1f);
+        float damageSum = 0;
+        for(Spell spell : spells) {
+            damageSum += spell.damage;
+            damageSum = Math.round(damageSum);
+        }
+        damage *= damageSum;
+        damage *= SpellConstants.DEFLECTROGUE;
+        hero.takeDamage(damage);
+        return hero;
     }
 }

@@ -3,7 +3,7 @@ package spell;
 import hero.*;
 
 public abstract class Spell {
-    protected final Hero castedBy;
+    protected Hero castedBy;
     protected float damage = 0;
     protected float terrainAmp;
 

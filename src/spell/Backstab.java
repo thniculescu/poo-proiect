@@ -11,13 +11,10 @@ public class Backstab extends Spell {
         super(hero, amp);
         damage = SpellConstants.BACKSTABBASE + hero.getLevel() * SpellConstants.BACKSTABLVL;
         damage *= terrainAmp;
-        if(((Rogue) hero).getBackstabCounter() == SpellConstants.BACKSTABROUNDS) {
-            ((Rogue) hero).resetBackstabCounter();
+        if(hero.getFights() % SpellConstants.BACKSTABROUNDS == 0) {
             if(TerrainMap.getInstance().getTerrain(hero.getX(), hero.getY()) == TerrainTypes.Woods) {
                 damage *= SpellConstants.BACKSTABBONUS;
             }
-        } else {
-            ((Rogue) hero).increaseBackstabCounter();
         }
     }
 
@@ -42,6 +39,7 @@ public class Backstab extends Spell {
     @Override
     public Rogue CastedOn(Rogue hero) {
         hero.takeDamage(damage * SpellConstants.BACKSTABROGUE);
+        castedBy.increaseFights();
         return hero;
     }
 }

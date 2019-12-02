@@ -34,6 +34,7 @@ public class Main {
 
                         ArrayList<Spell> firstSpells = first.getSpells(1f);
                         ArrayList<Spell> secondSpells = second.getSpells(1f);
+
                         first = first.isAffectedBy(secondSpells);
                         second = second.isAffectedBy(firstSpells);
 
@@ -46,16 +47,13 @@ public class Main {
                         if(!first.alive() && second.alive()) {
                             second.gainXp(potentialXp2);
                         }
-
+                        first.increaseFights();
+                        second.increaseFights();
                         heroes.set(j, first);
                         heroes.set(k, second);
                     }
                 }
             }
-        }
-
-        for (Hero hero : heroes) {
-            System.out.println(hero);
         }
 
         fileIO.printOutput();

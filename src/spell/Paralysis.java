@@ -24,28 +24,28 @@ public class Paralysis extends Spell {
     @Override
     public Knight CastedOn(Knight hero) {
         hero.takeDamage(damage * SpellConstants.PARALYSISKNIGHT);
-        hero.Paralyze(damage, numRounds);
+        hero.Paralyze(damage * SpellConstants.PARALYSISKNIGHT, numRounds);
         return hero;
     }
 
     @Override
     public Pyromancer CastedOn(Pyromancer hero) {
         hero.takeDamage(damage * SpellConstants.PARALYSISPYROMANCER);
-        hero.Paralyze(damage, numRounds);
+        hero.Paralyze(damage * SpellConstants.PARALYSISPYROMANCER, numRounds);
         return hero;
     }
 
     @Override
     public Wizard CastedOn(Wizard hero) {
         hero.takeDamage(damage * SpellConstants.PARALYSISWIZARD);
-        hero.Paralyze(damage, numRounds);
+        hero.Paralyze(damage * SpellConstants.PARALYSISWIZARD, numRounds);
         return hero;
     }
 
     @Override
     public Rogue CastedOn(Rogue hero) {
         hero.takeDamage(damage * SpellConstants.PARALYSISROGUE);
-        hero.Paralyze(damage, numRounds);
+        hero.Paralyze(damage * SpellConstants.PARALYSISROGUE, numRounds);
         return hero;
     }
 }
