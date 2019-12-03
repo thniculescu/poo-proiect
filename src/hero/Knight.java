@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Knight extends Hero {
     @Override
-    public final ArrayList<Spell> getSpells(final float amp) {
+    public final ArrayList<Spell> getSpells(final float amp) { // aplica amplificatorul de teren daca este cazul
         float newamp = amp;
         if (TerrainMap.getInstance().getTerrain(x, y) == TerrainTypes.Land) {
             newamp += SpellConstants.KNIGHTLANDBONUS;
@@ -29,7 +29,7 @@ public class Knight extends Hero {
         return temp;
     }
 
-    public Knight(final int x, final int y) {
+    public Knight(final int x, final int y) { // initializeaza statsurile de baza
         super(x, y);
         heroSpells.add(SpellTypes.Execute);
         heroSpells.add(SpellTypes.Slam);

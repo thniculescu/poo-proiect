@@ -8,14 +8,14 @@ public final class HeroFactory {
     private HeroFactory() {
     }
 
-    public static HeroFactory getInstance() {
+    public static HeroFactory getInstance() { // singleton pattern, nu sunt utile mai multe instante de hero factory
         if (instance == null) {
             instance = new HeroFactory();
         }
         return instance;
     }
 
-    public Hero get(final char type, final int x, final int y) {
+    public Hero get(final char type, final int x, final int y) { // instantiaza un nou erou la pozitia x, y de tipul type
         switch (type) {
             case HeroInputConstants.KNIGHT:
                 return new Knight(x, y);

@@ -8,7 +8,7 @@ public final class SpellFactory {
     private SpellFactory() {
     }
 
-    public static SpellFactory getInstance() {
+    public static SpellFactory getInstance() { // singleton pattern, nu este nevoie de mai multe instante spell factory
         if (instance == null) {
             instance = new SpellFactory();
         }

@@ -41,15 +41,15 @@ public final class FileIO {
         n = input.nextInt();
         input.nextLine();
         ArrayList<String> inputMap = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // citeste harta linie cu linie
             inputMap.add(input.nextLine());
         }
         TerrainMap map = TerrainMap.getInstance();
-        map.setTerrain(inputMap);
+        map.setTerrain(inputMap); // harta este transformata in casute tip terraintype
 
         int numHeroes = Integer.parseInt(input.nextLine());
         HeroFactory heroFactory = HeroFactory.getInstance();
-        for (int i = 0; i < numHeroes; i++) {
+        for (int i = 0; i < numHeroes; i++) { // sunt cititi si initializati eroii
             char type = input.next().charAt(0);
             int x = input.nextInt();
             int y = input.nextInt();
@@ -58,7 +58,7 @@ public final class FileIO {
         }
 
         numRounds = Integer.parseInt(input.nextLine());
-        for (int i = 0; i < numRounds; i++) {
+        for (int i = 0; i < numRounds; i++) { // se citesc si se parseaza miscarile fiecarui erou, lnie cu linie
             String inputMoves = input.nextLine();
             ArrayList<Move> roundMoves = new ArrayList<>();
             for (int j = 0; j < inputMoves.length(); j++) {
@@ -86,7 +86,7 @@ public final class FileIO {
     }
 
     public void printOutput() {
-        for (Hero hero : heroes) {
+        for (Hero hero : heroes) { // afiseaza in output starea eroilor
             output.println(hero);
         }
         output.flush();

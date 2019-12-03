@@ -22,7 +22,7 @@ public final class Deflect extends Spell {
     public Knight castedOn(final Knight hero) {
         ArrayList<Spell> spells = hero.getSpells(1f);
         float damageSum = 0;
-        for (Spell spell : spells) {
+        for (Spell spell : spells) { // se instantiaza spellurile castate de victima iar, pentru a fi calculat damageul
             damageSum += spell.damage;
             damageSum = Math.round(damageSum);
         }

@@ -17,7 +17,7 @@ public abstract class Hero {
     protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
 
-    public Hero(final int x, final int y) {
+    public Hero(final int x, final int y) { // initializeaza un erou la o anumita pozitie
         this.x = x;
         this.y = y;
         level = 0;
@@ -29,7 +29,7 @@ public abstract class Hero {
         fights = 0;
     }
 
-    public Hero(final Hero hero) {
+    public Hero(final Hero hero) { // copy constructor
         this.hp = hero.hp;
         this.xp = hero.xp;
         this.x = hero.x;
@@ -74,7 +74,7 @@ public abstract class Hero {
         return maxHp;
     }
 
-    public final void applyStatus() {
+    public final void applyStatus() { // aplica statusurile de ignite si paralyze daca este cazul
         if (igniteRounds > 0) {
             hp -= igniteDamage;
             igniteRounds--;
@@ -93,7 +93,7 @@ public abstract class Hero {
         return hp > 0;
     }
 
-    /** **/
+    /** Face afisarea mai "clean" de codat. **/
     @Override
     public String toString() {
         if (hp > 0) {
@@ -103,9 +103,10 @@ public abstract class Hero {
         }
     }
 
-    public abstract Hero isAffectedBy(ArrayList<Spell> spells);
+    public abstract Hero isAffectedBy(ArrayList<Spell> spells); // aplica spellurile pe erou
+                                                                // nu exista erou de tip Hero => functia este abstract
 
-    /** **/
+    /** Intoarce lista de spelluri, amp este amplificatorul de teren cu care sunt modificate spellurile. **/
     public ArrayList<Spell> getSpells(final float amp) {
         ArrayList<Spell> spellsToCast = new ArrayList<>();
         for (SpellTypes type : heroSpells) {
@@ -115,7 +116,7 @@ public abstract class Hero {
         return spellsToCast;
     }
 
-    public final void move(final Move move) {
+    public final void move(final Move move) { // misca eroul daca se poate
         if (move == null || this.paralyzed) {
             return;
         }
@@ -123,7 +124,7 @@ public abstract class Hero {
         y += move.getY();
     }
 
-    public final void gainXp(final int addedXp) {
+    public final void gainXp(final int addedXp) { // se ocupa de procesul de level up
         xp += addedXp;
         while (xp >= XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
             level++;
@@ -132,12 +133,12 @@ public abstract class Hero {
         }
     }
 
-    public final void paralyze(final float damage, final int duration) {
+    public final void paralyze(final float damage, final int duration) { // updateaza statusul de paralyzed
         this.paralysisDamage = Math.round(damage);
         this.paralysisRounds = duration;
     }
 
-    public final void ignite(final float damage, final int duration) {
+    public final void ignite(final float damage, final int duration) { // updateaza statusul de ignite
         this.igniteDamage = Math.round(damage);
         this.igniteRounds = duration;
     }
