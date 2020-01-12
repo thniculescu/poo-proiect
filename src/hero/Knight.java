@@ -1,5 +1,6 @@
 package hero;
 
+import angel.Angel;
 import constants.HeroInputConstants;
 import constants.HeroStatsConstants;
 import constants.SpellConstants;
@@ -29,6 +30,11 @@ public class Knight extends Hero {
         return temp;
     }
 
+    @Override
+    public void isAffectedBy(Angel angel) {
+        angel.affect(this);
+    }
+
     public Knight(final int x, final int y) { // initializeaza statsurile de baza
         super(x, y);
         heroSpells.add(SpellTypes.Execute);
@@ -45,5 +51,10 @@ public class Knight extends Hero {
     @Override
     public final String toString() {
         return HeroInputConstants.KNIGHT + " " + super.toString();
+    }
+
+    @Override
+    public String getType() {
+        return "Knight";
     }
 }

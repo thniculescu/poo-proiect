@@ -1,5 +1,6 @@
 package hero;
 
+import angel.Angel;
 import constants.XpConstants;
 import spell.Spell;
 import spell.SpellFactory;
@@ -14,8 +15,10 @@ public abstract class Hero {
     protected int paralysisDamage;
     protected int paralysisRounds;
     protected int fights;
+    protected String status;
     protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
+    protected float damageBoost = 0f;
 
     public Hero(final int x, final int y) { // initializeaza un erou la o anumita pozitie
         this.x = x;
@@ -105,6 +108,7 @@ public abstract class Hero {
 
     public abstract Hero isAffectedBy(ArrayList<Spell> spells); // aplica spellurile pe erou
                                                                 // nu exista erou de tip Hero => functia este abstract
+    public abstract void isAffectedBy(Angel angel); // asemanator pentru ingeri
 
     /** Intoarce lista de spelluri, amp este amplificatorul de teren cu care sunt modificate spellurile. **/
     public ArrayList<Spell> getSpells(final float amp) {
@@ -146,4 +150,6 @@ public abstract class Hero {
     public final void takeDamage(final float damage) {
         hp -= Math.round(damage);
     }
+
+    public abstract String getType();
 }

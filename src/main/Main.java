@@ -1,6 +1,8 @@
 package main;
 
+import angel.Angel;
 import constants.XpConstants;
+import grandmagus.GrandMagus;
 import hero.Hero;
 import hero.Move;
 import spell.Spell;
@@ -17,9 +19,12 @@ public final class Main {
 
         ArrayList<Hero> heroes = fileIO.getHeroes();
         ArrayList<ArrayList<Move>> moves = fileIO.getMoves();
+        GrandMagus grandMagus = GrandMagus.getInstance();
         int numRounds = fileIO.getNumRounds();
 
         for (int i = 0; i < numRounds; i++) {
+            fileIO.getOutput().println("~~ Round " + (int)(i + 1) + " ~~");
+            grandMagus.clearInformation();
             for (int j = 0; j < heroes.size(); j++) { // sunt aplicate statusurile si se misca eroii
                 heroes.get(j).applyStatus();
                 heroes.get(j).move(moves.get(i).get(j));
@@ -61,6 +66,28 @@ public final class Main {
                     }
                 }
             }
+
+            ArrayList<Angel> roundAngels = fileIO.getRoundAngels();
+            for(Angel angel : roundAngels) {
+                grandMagus.update(angel);
+                for(int j = 0; j < heroes.size(); j++) {
+                    if(heroes.get(j).getX() == angel.getX()
+                    && heroes.get(j).getY() == angel.getY()) {
+                        boolean before = heroes.get(j).alive();
+                        heroes.get(j).isAffectedBy(angel);
+                        grandMagus.update(angel, heroes.get(j), j);
+                        boolean after = heroes.get(j).alive();
+                        if(before != after) {
+                            grandMagus.update(heroes.get(j), j);
+                        }
+                    }
+                }
+            }
+
+            for(String string : grandMagus.getInformation()) {
+                fileIO.getOutput().println(string);
+            }
+            fileIO.getOutput().println("");
         }
 
         fileIO.printOutput();

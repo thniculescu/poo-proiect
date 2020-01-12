@@ -1,5 +1,7 @@
 package main;
 
+import angel.Angel;
+import angel.AngelFactory;
 import hero.Hero;
 import hero.HeroFactory;
 import hero.Move;
@@ -83,6 +85,25 @@ public final class FileIO {
             }
             moves.add(roundMoves);
         }
+    }
+
+    ArrayList<Angel> getRoundAngels() {
+        String angelsString = input.nextLine();
+        ArrayList<Angel> roundAngels = new ArrayList<>();
+
+        String[] angelArray = angelsString.split(" ");
+        int numAngels = Integer.parseInt(angelArray[0]);
+        for(int i = 0; i < numAngels; i++) {
+            String[] angelParams = angelArray[i + 1].split(",");
+            roundAngels.add(AngelFactory.getInstance().get(angelParams[0],
+                    Integer.valueOf(angelParams[1]),
+                    Integer.valueOf(angelParams[2])));
+        }
+        return roundAngels;
+    }
+
+    public PrintWriter getOutput() {
+        return output;
     }
 
     public void printOutput() {

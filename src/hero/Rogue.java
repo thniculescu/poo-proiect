@@ -1,5 +1,6 @@
 package hero;
 
+import angel.Angel;
 import constants.HeroInputConstants;
 import constants.HeroStatsConstants;
 import constants.SpellConstants;
@@ -26,12 +27,22 @@ public class Rogue extends Hero {
     }
 
     @Override
+    public String getType() {
+        return "Rogue";
+    }
+
+    @Override
     public final Rogue isAffectedBy(final ArrayList<Spell> spells) {
         Rogue temp = new Rogue(this);
         for (Spell spell : spells) {
             temp = spell.castedOn(temp);
         }
         return temp;
+    }
+
+    @Override
+    public void isAffectedBy(Angel angel) {
+        angel.affect(this);
     }
 
     public Rogue(final int x, final int y) {

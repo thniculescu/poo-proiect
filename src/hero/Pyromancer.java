@@ -1,5 +1,6 @@
 package hero;
 
+import angel.Angel;
 import constants.HeroInputConstants;
 import constants.HeroStatsConstants;
 import constants.SpellConstants;
@@ -26,12 +27,22 @@ public class Pyromancer extends Hero {
     }
 
     @Override
+    public String getType() {
+        return "Pyromancer";
+    }
+
+    @Override
     public final Pyromancer isAffectedBy(final ArrayList<Spell> spells) {
         Pyromancer temp = new Pyromancer(this);
         for (Spell spell : spells) {
             temp = spell.castedOn(temp);
         }
         return temp;
+    }
+
+    @Override
+    public void isAffectedBy(Angel angel) {
+        angel.affect(this);
     }
 
     public Pyromancer(final int x, final int y) {
