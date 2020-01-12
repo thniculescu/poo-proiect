@@ -2,6 +2,7 @@ package hero;
 
 import angel.Angel;
 import constants.XpConstants;
+import grandmagus.GrandMagus;
 import spell.Spell;
 import spell.SpellFactory;
 import spell.SpellTypes;
@@ -19,6 +20,7 @@ public abstract class Hero {
     protected boolean paralyzed = false;
     protected ArrayList<SpellTypes> heroSpells = new ArrayList<>();
     protected float damageBoost = 0f;
+    protected int id;
 
     public Hero(final int x, final int y) { // initializeaza un erou la o anumita pozitie
         this.x = x;
@@ -47,6 +49,7 @@ public abstract class Hero {
         this.heroSpells = new ArrayList<>(hero.heroSpells);
         this.paralyzed = hero.paralyzed;
         this.fights = hero.fights;
+        this.id = hero.id;
     }
 
     public final int getFights() {
@@ -132,9 +135,18 @@ public abstract class Hero {
         xp += addedXp;
         while (xp >= XpConstants.BASEXP + level * XpConstants.LVLUPEXP) {
             level++;
+            GrandMagus.getInstance().update(this, level);
             maxHp += hpPerLevel;
             hp = maxHp;
         }
+    }
+
+    public final void levelUp() { // creste eroul cu un nivel
+        xp = XpConstants.BASEXP + level * XpConstants.LVLUPEXP;
+        level++;
+        GrandMagus.getInstance().update(this, level);
+        maxHp += hpPerLevel;
+        hp = maxHp;
     }
 
     public final void paralyze(final float damage, final int duration) { // updateaza statusul de paralyzed
@@ -147,8 +159,29 @@ public abstract class Hero {
         this.igniteRounds = duration;
     }
 
+    public final void addToBoost(final float boost) {
+        damageBoost += boost;
+    }
+
     public final void takeDamage(final float damage) {
         hp -= Math.round(damage);
+    }
+
+    public final void setHp(final int hp) {
+        this.hp = hp;
+    }
+
+
+    public final void heal(final float heal) {
+        hp = Math.min((int)(hp + heal), maxHp);
+    }
+
+    public final int getId() {
+        return id;
+    }
+
+    public final void setId(final int id) {
+        this.id = id;
     }
 
     public abstract String getType();

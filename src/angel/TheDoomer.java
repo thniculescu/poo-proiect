@@ -17,21 +17,21 @@ public class TheDoomer extends Angel{
 
     @Override
     public void affect(Pyromancer hero) {
-
+        hero.setHp(0);
     }
 
     @Override
     public void affect(Knight hero) {
-
+        hero.setHp(0);
     }
 
     @Override
     public void affect(Rogue hero) {
-
+        hero.setHp(0);
     }
 
     @Override
     public void affect(Wizard hero) {
-
+        hero.setHp(0);
     }
 }

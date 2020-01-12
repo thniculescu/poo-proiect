@@ -1,5 +1,6 @@
 package angel;
 
+import constants.AngelConstants;
 import constants.AngelInputConstants;
 import hero.Knight;
 import hero.Pyromancer;
@@ -15,21 +16,25 @@ public class LevelUpAngel extends Angel {
 
     @Override
     public void affect(Pyromancer hero) {
-
+        hero.addToBoost(AngelConstants.LVLDMGPYRO);
+        hero.levelUp();
     }
 
     @Override
     public void affect(Knight hero) {
-
+        hero.addToBoost(AngelConstants.LVLDMGKNIGHT);
+        hero.levelUp();
     }
 
     @Override
     public void affect(Rogue hero) {
-
+        hero.addToBoost(AngelConstants.LVLDMGROGUE);
+        hero.levelUp();
     }
 
     @Override
     public void affect(Wizard hero) {
-
+        hero.addToBoost(AngelConstants.LVLDMGWIZARD);
+        hero.levelUp();
     }
 }

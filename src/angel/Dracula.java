@@ -1,5 +1,6 @@
 package angel;
 
+import constants.AngelConstants;
 import constants.AngelInputConstants;
 import hero.Knight;
 import hero.Pyromancer;
@@ -15,21 +16,25 @@ public class Dracula extends Angel {
 
     @Override
     public void affect(Pyromancer hero) {
-
+        hero.takeDamage(AngelConstants.DRAHPPYRO);
+        hero.addToBoost(AngelConstants.DRADMGPYRO);
     }
 
     @Override
     public void affect(Knight hero) {
-
+        hero.takeDamage(AngelConstants.DRAHPKNIGHT);
+        hero.addToBoost(AngelConstants.DRADMGKNIGHT);
     }
 
     @Override
     public void affect(Rogue hero) {
-
+        hero.takeDamage(AngelConstants.DRAHPROGUE);
+        hero.addToBoost(AngelConstants.DRADMGROGUE);
     }
 
     @Override
     public void affect(Wizard hero) {
-
+        hero.takeDamage(AngelConstants.DRAHPWIZARD);
+        hero.addToBoost(AngelConstants.DRADMGWIZARD);
     }
 }

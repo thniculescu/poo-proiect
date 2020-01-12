@@ -1,5 +1,6 @@
 package angel;
 
+import constants.AngelConstants;
 import constants.AngelInputConstants;
 import hero.Knight;
 import hero.Pyromancer;
@@ -15,21 +16,21 @@ public class XPAngel extends Angel {
 
     @Override
     public void affect(Pyromancer hero) {
-
+        hero.gainXp((int) AngelConstants.XPHPPYRO);
     }
 
     @Override
     public void affect(Knight hero) {
-
+        hero.gainXp((int) AngelConstants.XPHPKNIGHT);
     }
 
     @Override
     public void affect(Rogue hero) {
-
+        hero.gainXp((int) AngelConstants.XPHPROGUE);
     }
 
     @Override
     public void affect(Wizard hero) {
-
+        hero.gainXp((int) AngelConstants.XPHPWIZARD);
     }
 }

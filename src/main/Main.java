@@ -18,12 +18,15 @@ public final class Main {
         fileIO.readInput();
 
         ArrayList<Hero> heroes = fileIO.getHeroes();
+        for(int i = 0; i < heroes.size(); i++) {
+            heroes.get(i).setId(i);
+        }
         ArrayList<ArrayList<Move>> moves = fileIO.getMoves();
         GrandMagus grandMagus = GrandMagus.getInstance();
         int numRounds = fileIO.getNumRounds();
 
         for (int i = 0; i < numRounds; i++) {
-            fileIO.getOutput().println("~~ Round " + (int)(i + 1) + " ~~");
+            fileIO.getOutput().println("~~ Round " + (i + 1) + " ~~");
             grandMagus.clearInformation();
             for (int j = 0; j < heroes.size(); j++) { // sunt aplicate statusurile si se misca eroii
                 heroes.get(j).applyStatus();
@@ -55,9 +58,11 @@ public final class Main {
 
                         if (first.alive() && !second.alive()) { // se acorda xp daca este cazul
                             first.gainXp(potentialXp1);
+                            grandMagus.update(second, first);
                         }
                         if (!first.alive() && second.alive()) {
                             second.gainXp(potentialXp2);
+                            grandMagus.update(first, second);
                         }
                         first.increaseFights();
                         second.increaseFights();
@@ -65,31 +70,33 @@ public final class Main {
                         heroes.set(k, second);
                     }
                 }
+
             }
 
             ArrayList<Angel> roundAngels = fileIO.getRoundAngels();
             for(Angel angel : roundAngels) {
                 grandMagus.update(angel);
-                for(int j = 0; j < heroes.size(); j++) {
-                    if(heroes.get(j).getX() == angel.getX()
-                    && heroes.get(j).getY() == angel.getY()) {
-                        boolean before = heroes.get(j).alive();
-                        heroes.get(j).isAffectedBy(angel);
-                        grandMagus.update(angel, heroes.get(j), j);
-                        boolean after = heroes.get(j).alive();
-                        if(before != after) {
-                            grandMagus.update(heroes.get(j), j);
+                for (Hero hero : heroes) {
+                    if (hero.getX() == angel.getX()
+                            && hero.getY() == angel.getY()) {
+                        boolean before = hero.alive();
+                        grandMagus.update(angel, hero);
+                        hero.isAffectedBy(angel);
+                        boolean after = hero.alive();
+                        if (before != after) {
+                            grandMagus.update(hero);
                         }
                     }
                 }
             }
 
-            for(String string : grandMagus.getInformation()) {
+            for(String string : grandMagus.getAllInformation()) {
                 fileIO.getOutput().println(string);
             }
             fileIO.getOutput().println("");
         }
 
+        fileIO.getOutput().println("~~ Results ~~");
         fileIO.printOutput();
     }
 }
